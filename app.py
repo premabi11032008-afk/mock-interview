@@ -23,15 +23,26 @@ feedback_agent = Agent(
 )
 
 question_task = Task(
-    description="""{history}
-""",
+    description="""You are conducting a Data Scientist interview.
+
+Conversation so far:
+{history}
+
+Based on the previous answer, generate the NEXT interview question.
+Ask only ONE question.""",
     agent=question_agent,
-    expected_output="A list of 5 interview questions."
+    expected_output="A list of 1 interview questions."
 )
 
 feedback_task = Task(
     description="""
+You are evaluating a candidate's interview answer.
+
+Conversation:
 {history}
+
+Give short feedback on the candidate's latest answer.
+Be concise.
 """,
     agent=feedback_agent,
     expected_output="Short interview feedback."
