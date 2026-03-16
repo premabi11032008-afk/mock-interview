@@ -48,7 +48,7 @@ Be concise.
     expected_output="Short interview feedback."
 )
 
-question_crew=Crew(agents=[question_agent],task=[question_task])
+question_crew=Crew(agents=[question_agent],tasks=[question_task])
 feedback_crew=Crew(agents=[feedback_agent],tasks=[feedback_task])
 
 
@@ -92,9 +92,8 @@ if st.button("Submit Answer"):
 
     feedback_text = ""
 
-    for chunk in stream:
-        feedback_text += chunk
-        st.write(feedback_text)
+    feedback = feedback_crew.kickoff(inputs={"history": feedback_prompt})
+    st.write(str(feedback))
 
     next_question_prompt = f"""
     Interview History:
