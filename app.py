@@ -61,7 +61,7 @@ if "current_question" not in st.session_state:
     
     response = question_crew.kickoff(inputs=
         {"history":"Start the interview with the first Data Scientist interview question."}
-    )
+    ).raw
     
     st.session_state.current_question = response
 
@@ -88,7 +88,7 @@ if st.button("Submit Answer"):
 
     st.subheader("Feedback")
 
-    stream = feedback_crew.kickoff(inputs={"history":feedback_prompt})
+    stream = feedback_crew.kickoff(inputs={"history":feedback_prompt}).raw
 
     feedback_text = ""
 
@@ -101,7 +101,7 @@ if st.button("Submit Answer"):
 
     Based on the previous answer, ask the next Data Scientist interview question.
     """
-    next_q = question_crew.kickoff(inputs={"history":next_question_prompt})
+    next_q = question_crew.kickoff(inputs={"history":next_question_prompt}).raw
 
     st.session_state.current_question = next_q
     st.rerun()
