@@ -1,11 +1,8 @@
 from crewai import Agent,LLM
 import streamlit as st
-from dotenv import load_dotenv
-import os
 
-load_dotenv()
 
-api_key=os.environ["GOOGLE_API_KEY"]
+api_key=st.secrets["GOOGLE_API_KEY"]
 llm=LLM(model="gemini-2.5-flash",api_key=api_key,max_tokens=200)
 
 # Question Generator Agent
